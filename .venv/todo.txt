@@ -2,4 +2,4 @@ Hestia
 play a game
 code
 data analytics, then DSA
-HiMangoes
+Mangoes
