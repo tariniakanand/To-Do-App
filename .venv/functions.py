@@ -1,3 +1,4 @@
+FILEPATH='todo.txt'
 def get_todos(filepath='todo.txt'):
     """" Read the text file and return the todo list """
     with open(filepath, 'r') as file_lcl:
