@@ -1,28 +1,34 @@
 import functions
 import FreeSimpleGUI as sg
 import time
+import os
+
+if not os.path.exists("todo.txt"):
+    with open("todo.txt", 'w') as file:
+        pass
 
 sg.theme("LightBlue2")
 
 clock=sg.Text("", key='clock')
 label=sg.Text("Type a ToDo")
-input_box=sg.InputText(tooltip="Enter ToDo", key='todo')
-add_button=sg.Button("Add")
+input_box=sg.InputText(tooltip="Enter ToDo", key='todo', size=48)
+add_button=sg.Button("Add", size=7)
 list_box=sg.Listbox(values=functions.get_todos(),
                     key='todos', enable_events=True, size=[45,10])
-edit_btn=sg.Button("Edit")
-cmpt_btn=sg.Button("Complete")
-exit_btn=sg.Button("Exit")
+edit_btn=sg.Button("Edit", size=7)
+cmpt_btn=sg.Button("Complete", size=7)
+exit_btn=sg.Button("Exit", size=7)
+col1=sg.Column([[edit_btn],[cmpt_btn]])
 
 window=sg.Window("Tari's ToDo",
                  layout=[[clock],
-                         [label, input_box, add_button],
-                         [list_box, edit_btn, cmpt_btn],
+                         [label], [input_box, add_button],
+                         [list_box, col1],
                          [exit_btn]],
                  font=('Helvetica', 10))
 
 while True:
-    event, values = window.read(timeout=10)
+    event, values = window.read(timeout=200)
     window['clock'].update(value=time.strftime("%b %d, %Y %H:%M:%S"))
     match event:
         case "Add":
